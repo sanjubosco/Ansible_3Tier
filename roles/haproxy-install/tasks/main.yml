@@ -1,0 +1,35 @@
+---
+###############################################################
+# Good ansible! This playbook is an example of Good practices!
+# Created by Sanju Bosco
+###############################################################
+#
+#
+###############################################################
+
+## Start of WebServer Installation
+# No need for fact checking here
+- name: http
+  package:
+   name: httpie
+   state: latest
+- name: Install HA Proxy
+  package:
+   name: haproxy
+   state: latest
+- name: Enable HA Proxy
+  service:
+   name: haproxy
+   state: started
+- name: Configure HA Proxy
+  template:
+   src: haproxy.cfg.j2
+   dest: /etc/haproxy/haproxy.cfg
+- name: restart HA Proxy
+  service:
+   name: haproxy
+   state: restarted
+
+## End of WebServer Installation
+      
+...

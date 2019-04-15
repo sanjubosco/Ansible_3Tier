@@ -1,0 +1,7 @@
+---
+## set the server specific parameters here
+#
+haproxy: true
+
+...
+

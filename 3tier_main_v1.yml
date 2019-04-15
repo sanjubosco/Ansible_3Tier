@@ -1,0 +1,4 @@
+- include: configure-repo.yml
+- include: haproxy-install.yml
+- include: tomcat-install.yml
+- include: postgres-install.yml

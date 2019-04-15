@@ -1,0 +1,7 @@
+- name: Install Tomcat
+  hosts: apps
+  gather_facts: false
+  become: true
+  roles:
+   - role: tomcat-install
+     when: tomcat is defined and tomcat == true

@@ -1,0 +1,11 @@
+- name: cleanup
+  hosts: all
+  gather_facts: false
+  become: true
+  roles:
+   - role: setup
+   - role: configure-repo
+   - role: haproxy-install
+     when: haproxy_fact is defined and haproxy_fact == true
+   - role: tomcat-install
+     when: tomcat_fact is defined and tomcat_fact == true

@@ -1,0 +1,49 @@
+---
+###############################################################
+# Good ansible! This playbook is an example of Good practices!
+# Created by Sanju Bosco
+###############################################################
+#
+#
+###############################################################
+
+## Start of tomcat Installation
+# No need for fact checking here
+
+- name: Deploy Tomcat
+  package:
+   name: tomcat
+   state: latest
+   
+- name: Enable Tomcat at boot
+  service:
+   name: tomcat
+   enabled: yes
+   
+- name: Create ROOT Tomcat Directory
+  file:
+   path: /usr/share/tomcat/webapps/ROOT
+   state: directory
+   
+- name: Create Ansible Tomcat Directory
+  file:
+   path: /usr/share/tomcat/webapps/ansible
+   state: directory
+
+- name: Copy Static index.html to webapps/ROOT/index.html
+  template:
+   src: index.html.j2
+   dest: /usr/share/tomcat/webapps/ROOT/index.html
+   mode: 0644
+
+- name: Copy static index.html to webapps/ansible/index.html
+  template:
+   src: index.html.app
+   dest: /usr/share/tomcat/webapps/ansible/index.html
+      
+- name: Start Tomcat
+  service:
+   name: tomcat
+   state: restarted
+      
+...

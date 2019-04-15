@@ -1,0 +1,24 @@
+---
+## This role sets up all facts for initial identification for teh servers
+## Start debug message
+- name: Setting Server Facts
+  debug:
+   msg: "Setting Server Facts"
+  tags: 
+  - debug
+
+## Set haproxy fact
+- name: Set HA Proxy Fact
+  set_fact: 
+   haproxy_fact: "true"
+  when:
+  - haproxy is defined and haproxy|lower != "none" and haproxy|lower != "null"
+
+## Set tomcat fact
+- name: Set Tomcat Fact
+  set_fact:
+   tomcat_fact: "true"
+  when:
+  - tomcat is defined and tomcat|lower != "none" and tomcat|lower != "null"
+
+...

@@ -1,0 +1,7 @@
+- name: Configure Repo
+  hosts: appdbs
+  gather_facts: false
+  become: true
+  roles:
+   - role: postgres-install
+     when: postgress is defined and postgress == true

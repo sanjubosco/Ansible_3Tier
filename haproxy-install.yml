@@ -1,0 +1,7 @@
+- name: Intalls HA Proxy
+  hosts: frontends
+  gather_facts: false
+  become: true
+  roles:
+   - role: haproxy-install
+     when: haproxy is defined and haproxy == true

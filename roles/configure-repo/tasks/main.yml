@@ -1,0 +1,19 @@
+---
+###############################################################
+# Good ansible! This playbook is an example of Good practices!
+# Created by Sanju Bosco
+###############################################################
+#
+#
+###############################################################
+
+## Start of WebServer Installation
+# No need for fact checking here
+# enable the repositories
+- name: Enable Repositories
+  template:
+   src: open_three-tier-app.repo
+   dest: /etc/yum.repos.d/open_three-tier-app.repo
+   mode: 0644
+
+...

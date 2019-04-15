@@ -1,0 +1,8 @@
+---
+## set the server specific parameters here
+#
+tomcat: true
+app_server_name: app1
+
+...
+

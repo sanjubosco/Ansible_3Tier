@@ -1,0 +1,45 @@
+---
+###############################################################
+# Good ansible! This playbook is an example of Good practices!
+# Created by Sanju Bosco
+###############################################################
+#
+#
+###############################################################
+
+## Start of PostGres Installation
+# No need for fact checking here
+## Check if postgres is already installed
+- name: Check Postgres is installed
+  stat:
+   path: "/var/lib/pgsql/data"
+  register: postgress_installed
+
+- name: Deploy Postgres
+  package:
+   name: postgresql-server
+   state: latest
+
+- name: Enable Postgres at Boot
+  service:
+   name: postgresql
+   enabled: yes
+   
+- name: tell user to finish setting up postgres
+  debug:
+   msg: "Either uncomment the postgres setup or manually login and initialize"
+
+# only run the next 2 tasks once!
+- name: initilize postgres
+  command: postgresql-setup initdb
+  when: postgress_installed.stat.exists != true
+- name: initilize postgres some more
+  command: chkconfig postgresql on
+  when: postgress_installed.stat.exists != true
+
+- name: start postgres
+  service:
+   name: postgresql.service
+   state: started
+
+...

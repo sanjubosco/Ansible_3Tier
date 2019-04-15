@@ -1,0 +1,19 @@
+---
+# Initial, common, system setup steps
+
+- name: reverse the enabling of sudo without tty for some ansible commands
+  replace:
+    path: /etc/sudoers
+    regexp: 'Defaults\s*!requiretty'
+    replace: '^Defaults requiretty'
+    backup: yes
+
+- name: remove base tools and three tier app packages
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - httpie
+    - python-pip
+    - haproxy
+

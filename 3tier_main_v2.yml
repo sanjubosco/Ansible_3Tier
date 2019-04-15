@@ -1,0 +1,4 @@
+- import_playbook: configure-repo.yml
+- import_playbook: haproxy-install.yml
+- import_playbook: tomcat-install.yml
+- import_playbook: postgres-install.yml
